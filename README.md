@@ -1,15 +1,15 @@
-Medium multiply
-A small demo library for a Medium publication about publishing libraries.
+Fumigate
+A small demo library to help for NLP's most tedious task text cleaning.
 
 Installation
-pip install medium-multiply
+pip install -i https://test.pypi.org/simple/ fumigate
 #Get started
-How to multiply one number by another with this lib:
+How to fumigate(clean) your text data
 
-    1.  from medium_multiply import Multiplication
+    1.  from fumigate import Fumes
 
-    2. Instantiate a Multiplication object
-        multiplication = Multiplication(2)
+    2. Instantiate a Fumes object
+        fumes = Fumes()
 
-    3. Call the multiply method
-        result = multiplication.multiply(5)
+    3. Call the purge method
+        result = fumes.purge(<text>)
