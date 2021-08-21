@@ -5,7 +5,7 @@ on:
     
   workflow_dispatch:
 
-name: Publish Python distributions to PyPi
+name: PyPi-Publish Python distributions
 
 jobs:
   build-n-publish:
