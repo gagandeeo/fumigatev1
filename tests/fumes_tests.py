@@ -37,8 +37,38 @@ class FumesTestCase(unittest.TestCase):
         """Test list of text"""
 
         result = [self.fumes.purge(x) for x in self.list_of_text]
-        answer = ['hey amazon package never arrived one reviewers mentioned watching oz episode youll hooked right exactly happened mebr br', 'sure would like see resurrection dated seahunt series tech today would bring back kid excitement mei grew black white tv seahunt gunsmoke heros every weekyou vote comeback new sea huntwe need change pace tv would work world water adventureoh way thank outlet like view many viewpoints tv many moviesso ole way believe ive got wanna saywould nice read plus points sea huntif rhymes would lines would let submitor leave doubt quitif must go lets', 'please fix asap hey amazon package never arrived', 'please fix asap']
+        answer = [
+            'hey amazon package never arrived one reviewers mentioned watching oz episode youll hooked right exactly happened mebr br',
+            'sure would like see resurrection dated seahunt series tech today would bring back kid excitement mei grew black white tv seahunt gunsmoke heros every weekyou vote comeback new sea huntwe need change pace tv would work world water adventureoh way thank outlet like view many viewpoints tv many moviesso ole way believe ive got wanna saywould nice read plus points sea huntif rhymes would lines would let submitor leave doubt quitif must go lets',
+            'please fix asap hey amazon package never arrived', 'please fix asap']
         self.assertEqual(result, answer)
+
+    def test_clean(self):
+        """Test Clean method"""
+
+        result = self.fumes.clean(self.single_text, methods=["url", "sym"])
+        answer = "hey amazon my package never arrived please fix asap amazonhelp "
+        self.assertEqual(result, answer)
+
+    def test_clean_extract(self):
+        """Test Clean method with extract garbage"""
+
+        result = self.fumes.clean(self.single_text, methods=["url"], extract=True)
+        answer = ('hey amazon - my package never arrived please fix asap! @amazonhelp ',
+                  [['https://www.amazon.com/gp/css/order-history?ref_=nav_orders_first']])
+        self.assertEqual(result, answer)
+
+    def test_clean_exception(self):
+        """Test Exception for clean method"""
+
+        with self.assertRaises(Exception):
+            self.fumes.clean(self.single_text, methods=["sym", "num", "gum"])
+
+    def test_purge_exception(self):
+        """Test Exception for purge method"""
+
+        with self.assertRaises(Exception):
+            self.fumes.purge()
 
 
 if __name__ == '__main__':
