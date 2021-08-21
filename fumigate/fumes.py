@@ -1,6 +1,6 @@
 import re
 import string
-from utils import util_constants as util_const
+from utils import stopwords
 
 
 class Fumes:
@@ -31,6 +31,6 @@ class Fumes:
             text = re.sub(r"(@[A-Za-z0-9]+)|(\d+)|([^0-9A-Za-z ])|(\w+:\/\/\S+)|^rt|http.+?", "", text)
             text = re.sub(r"\s+", " ", text)
             # remove StopWords
-            text = " ".join([word for word in text.split() if word not in util_const.stopwords])
+            text = " ".join([word for word in text.split() if word not in stopwords])
             return text
 
