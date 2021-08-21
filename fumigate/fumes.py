@@ -26,7 +26,6 @@ class Fumes:
         :rtype: string
         """
         if self.methods is None:
-            # for text in texts:
             text = text.lower()
             # Remove Symbols, Links, Numbers, Emojis
             text = re.sub(r"(@[A-Za-z0-9]+)|(\d+)|([^0-9A-Za-z ])|(\w+:\/\/\S+)|^rt|http.+?", "", text)

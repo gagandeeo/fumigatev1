@@ -1,5 +1,6 @@
 Fumigate
-A small demo library to help for NLP's most tedious task text cleaning.
+
+A small demo library to help in NLP's most tedious task text cleaning.
 
 Installation
 pip install -i https://test.pypi.org/simple/ fumigate
