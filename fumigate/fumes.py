@@ -1,6 +1,6 @@
 import re
 import string
-from utils import stopwords
+from nltk.corpus import stopwords
 
 
 class Fumes:
@@ -14,6 +14,7 @@ class Fumes:
 
     def __init__(self, methods: list = None):
         self.methods = methods
+        self.stopwords = stopwords.words('english')
 
     def purge(self, text: string) -> string:
         """
@@ -31,6 +32,6 @@ class Fumes:
             text = re.sub(r"(@[A-Za-z0-9]+)|(\d+)|([^0-9A-Za-z ])|(\w+:\/\/\S+)|^rt|http.+?", "", text)
             text = re.sub(r"\s+", " ", text)
             # remove StopWords
-            text = " ".join([word for word in text.split() if word not in stopwords])
+            text = " ".join([word for word in text.split() if word not in self.stopwords])
             return text
 
