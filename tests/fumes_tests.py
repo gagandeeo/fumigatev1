@@ -46,8 +46,8 @@ class FumesTestCase(unittest.TestCase):
     def test_clean(self):
         """Test Clean method"""
 
-        result = self.fumes.clean(self.single_text, methods=["url", "sym"])
-        answer = "hey amazon my package never arrived please fix asap amazonhelp "
+        result = self.fumes.clean(self.single_text, methods=["url", "sym", "stopwords"])
+        answer = "hey amazon package never arrived please fix asap amazonhelp"
         self.assertEqual(result, answer)
 
     def test_clean_extract(self):

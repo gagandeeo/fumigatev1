@@ -48,14 +48,18 @@ class Fumes:
         emoj = re.compile(regex, re.UNICODE)
         return re.sub(emoj, '', self.text), garbage
 
-    # @todo Remove Combinations
-    # @todo Remove Stopwords
+    # Remove Stopwords
+    def _stopwords(self, extract=False):
+        garbage = None
+        if extract:
+            garbage = [word for word in self.text.split() if word in self.stopwords]
+        return " ".join([word for word in self.text.split() if word not in self.stopwords]), garbage
 
     def clean(self, text: string, methods: list = None, extract: bool = False):
         """
         Fumigate the text
 
-        :param methods: Available methods for fumigation ["sym" | "num" | "url" | "emo"].
+        :param methods: Available methods ["sym" | "num" | "url" | "emo"].
         :type methods: list[string]
 
         :param text: The text to fumigate.
@@ -86,7 +90,7 @@ class Fumes:
 
     def purge(self, text: string) -> string:
         """
-        Fumigate the text
+        Fumigate the text using all methods
 
         :param text: The text to fumigate.
         :type text: string
@@ -95,13 +99,13 @@ class Fumes:
         :rtype: string
         """
         try:
-            text = text.lower()
+            self.text = text.lower()
             # Remove Symbols, Links, Numbers, Emojis
-            text = re.sub(r"(@[A-Za-z0-9]+)|(\d+)|([^0-9A-Za-z ])|(\w+:\/\/\S+)|^rt|http.+?", "", text)
-            text = re.sub(r"\s+", " ", text)
+            self.text = re.sub(r"(@[A-Za-z0-9]+)|(\d+)|([^0-9A-Za-z ])|(\w+:\/\/\S+)|^rt|http.+?", "", self.text)
+            self.text = re.sub(r"\s+", " ", self.text)
             # remove StopWords
-            text = " ".join([word for word in text.split() if word not in self.stopwords])
-            return text
+            self.text, _ = self._stopwords()
+            return self.text
         except Exception as e:
             raise Exception(e)
-        # raise Exception("Purge works only when methods=None")
+
