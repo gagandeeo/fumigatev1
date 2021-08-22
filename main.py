@@ -19,7 +19,8 @@ test = [
 ]
 fumes = Fumes()
 # text = fumes.clean("hey amazon - my package never arrived https://www.amazon.com/gp/css/order-history?ref_=nav_orders_first please fix asap! @amazonhelp ",
-#                    methods=["url", "sym", "stopwords"])
+#                    methods=["url"], extract=True)
+# print(text)
 # print(re.findall(r'(\w+:\/\/\S+)|^rt|http.+?', test[2]))
 # print(re.findall(r'\d+', "1234"))
-print([fumes.clean(x, methods=["url", "sym", "stopwords", "emo", "num"]) for x in test])
+print([fumes.clean(x, methods=["url", "stopwords", "emo", "num"]) for x in test])

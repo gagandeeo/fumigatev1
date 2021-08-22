@@ -38,8 +38,13 @@ class FumesTestCase(unittest.TestCase):
 
         result = [self.fumes.purge(x) for x in self.list_of_text]
         answer = [
-            'hey amazon package never arrived one reviewers mentioned watching oz episode youll hooked right exactly happened mebr br',
-            'sure would like see resurrection dated seahunt series tech today would bring back kid excitement mei grew black white tv seahunt gunsmoke heros every weekyou vote comeback new sea huntwe need change pace tv would work world water adventureoh way thank outlet like view many viewpoints tv many moviesso ole way believe ive got wanna saywould nice read plus points sea huntif rhymes would lines would let submitor leave doubt quitif must go lets',
+            'hey amazon package never arrived one reviewers mentioned watching oz episode youll hooked right exactly '
+            'happened mebr br',
+            'sure would like see resurrection dated seahunt series tech today would bring back kid excitement mei '
+            'grew black white tv seahunt gunsmoke heros every weekyou vote comeback new sea huntwe need change pace '
+            'tv would work world water adventureoh way thank outlet like view many viewpoints tv many moviesso ole '
+            'way believe ive got wanna saywould nice read plus points sea huntif rhymes would lines would let '
+            'submitor leave doubt quitif must go lets',
             'please fix asap hey amazon package never arrived', 'please fix asap']
         self.assertEqual(result, answer)
 

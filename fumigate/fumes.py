@@ -1,6 +1,5 @@
 import re
-import string
-from typing import Tuple, Any
+from typing import Tuple, Union, List
 
 from nltk.corpus import stopwords
 
@@ -41,7 +40,11 @@ class Fumes:
 
     # Remove Emojis
     def _emo(self, extract=False):
-        regex = "[" u"\U0001F600-\U0001F64F" u"\U0001F300-\U0001F5FF" u"\U0001F680-\U0001F6FF" u"\U0001F1E0-\U0001F1FF" u"\U00002500-\U00002BEF" u"\U00002702-\U000027B0" u"\U00002702-\U000027B0" u"\U000024C2-\U0001F251" u"\U0001f926-\U0001f937" u"\U00010000-\U0010ffff" u"\u2640-\u2642" u"\u2600-\u2B55" u"\u200d" u"\u23cf" u"\u23e9" u"\u231a" u"\ufe0f" u"\u3030""]+"
+        regex = "[" u"\U0001F600-\U0001F64F" u"\U0001F300-\U0001F5FF" u"\U0001F680-\U0001F6FF" \
+                u"\U0001F1E0-\U0001F1FF" u"\U00002500-\U00002BEF" u"\U00002702-\U000027B0" \
+                u"\U00002702-\U000027B0" u"\U000024C2-\U0001F251" u"\U0001f926-\U0001f937" \
+                u"\U00010000-\U0010ffff" u"\u2640-\u2642" u"\u2600-\u2B55" u"\u200d" u"\u23cf" \
+                u"\u23e9" u"\u231a" u"\ufe0f" u"\u3030""]+ "
         garbage = None
         if extract:
             garbage = re.findall(regex, self.text)
@@ -55,7 +58,7 @@ class Fumes:
             garbage = [word for word in self.text.split() if word in self.stopwords]
         return " ".join([word for word in self.text.split() if word not in self.stopwords]), garbage
 
-    def clean(self, text: string, methods: list = None, extract: bool = False):
+    def clean(self, text: str, methods: List[str] = None, extract: bool = False) -> Union[str, Tuple[str, list]]:
         """
         Fumigate the text
 
@@ -68,8 +71,8 @@ class Fumes:
         :param extract: Return fumigated values.
         :type extract: bool
 
-        :return: The result after fumigation.
-        :rtype: string
+        :return: (The result after fumigation, fumigated values).
+        :rtype: Union[str, Tuple[str, list]]
         """
 
         try:
@@ -88,7 +91,7 @@ class Fumes:
         except Exception as e:
             raise Exception(e)
 
-    def purge(self, text: string) -> string:
+    def purge(self, text: str) -> str:
         """
         Fumigate the text using all methods
 
@@ -96,7 +99,7 @@ class Fumes:
         :type text: string
 
         :return: The result after fumigation.
-        :rtype: string
+        :rtype: str
         """
         try:
             self.text = text.lower()
