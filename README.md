@@ -4,7 +4,9 @@ A small demo library to help in NLP's most tedious task text cleaning.
 
 Installation
 pip install fumigate
+
 #Get started
+
 How to fumigate(clean) your text data
 
     1.  from fumigate import Fumes
