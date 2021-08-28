@@ -1,7 +1,7 @@
 import re
 from typing import Tuple, Union, List
-
 from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
 
 
 class Fumes:
@@ -63,7 +63,7 @@ class Fumes:
         Fumigate the text
 
         :param methods: Available methods ["sym" | "num" | "url" | "emo"].
-        :type methods: list[string]
+        :type methods: List[str]
 
         :param text: The text to fumigate.
         :type text: string
@@ -96,7 +96,7 @@ class Fumes:
         Fumigate the text using all methods
 
         :param text: The text to fumigate.
-        :type text: string
+        :type text: str
 
         :return: The result after fumigation.
         :rtype: str
@@ -112,3 +112,29 @@ class Fumes:
         except Exception as e:
             raise Exception(e)
 
+    @staticmethod
+    def stem(text: str) -> str:
+        """
+        Stemming method
+
+        :param text: The text to apply stemming.
+        :return: The result after stemming.
+        :rtype: str
+        """
+        port_stem = PorterStemmer()
+        tok_sent = [port_stem.stem(word) for word in text.split()]
+        return " ".join([word for word in tok_sent])
+
+    @staticmethod
+    def lemm(text: str, pos: str = "n") -> str:
+        """
+        Lemmatizing method
+
+        :param text: The text to apply Lemmatizing.
+        :param pos: The part of speech to apply.
+        :return: The result after Lemmatizing.
+        :rtype: str
+        """
+        wordnet_lemm = WordNetLemmatizer()
+        tok_sent = [wordnet_lemm.lemmatize(word, pos=pos) for word in text.split()]
+        return " ".join([word for word in tok_sent])

@@ -75,6 +75,40 @@ class FumesTestCase(unittest.TestCase):
         with self.assertRaises(Exception):
             self.fumes.purge()
 
+    def test_stem(self):
+        """Test Stemming method"""
+
+        result = [self.fumes.purge(txt) for txt in self.list_of_text]
+        result = [self.fumes.stem(txt) for txt in result]
+        answer = [
+                'hey amazon packag never arriv one review mention watch oz episod youll hook right exactli happen '
+                'mebr br', 'sure would like see resurrect date seahunt seri tech today would bring back kid excit '
+                'mei grew black white tv seahunt gunsmok hero everi weekyou vote comeback new sea huntw '
+                'need chang pace tv would work world water adventureoh way thank outlet like view mani '
+                'viewpoint tv mani moviesso ole way believ ive got wanna saywould nice read plu point '
+                'sea huntif rhyme would line would let submitor leav doubt quitif must go let',
+                'pleas fix asap hey amazon packag never arriv', 'pleas fix asap'
+        ]
+        self.assertEqual(result, answer)
+
+    def test_lemma(self):
+        """Test Lemmatizing method"""
+
+        result = [self.fumes.purge(txt) for txt in self.list_of_text]
+        result = [self.fumes.lemm(txt, pos='n') for txt in result]
+        answer = [
+                'hey amazon package never arrived one reviewer mentioned watching oz episode youll hooked right '
+                'exactly happened mebr br', 'sure would like see resurrection dated seahunt series tech today would '
+                'bring back kid excitement mei grew black white tv seahunt gunsmoke '
+                'hero every weekyou vote comeback new sea huntwe need change pace tv '
+                'would work world water adventureoh way thank outlet like view many '
+                'viewpoint tv many moviesso ole way believe ive got wanna saywould nice '
+                'read plus point sea huntif rhyme would line would let submitor leave '
+                'doubt quitif must go let', 'please fix asap hey amazon package never '
+                'arrived', 'please fix asap'
+        ]
+        self.assertEqual(result, answer)
+
 
 if __name__ == '__main__':
     unittest.main()
